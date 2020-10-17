@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Web3Provider } from "@ethersproject/providers";
 import { useQuery } from "@apollo/react-hooks";
 
-import { Body, Button, Header, Image, HeroImage, Link, LogoSection, Tokens, Token, Label, Subtitle, PairAddress, About } from "./components";
+import { Body, Button, Header, Image, HeroImage, Link, LogoSection, Tokens, Token, Label, Subtitle, PairAddress, About, Container, CreatePairMessage } from "./components";
 import { web3Modal, logoutOfWeb3Modal } from "./utils/web3Modal";
 import logo from "./Paireth_large.png";
 import uniswapLogo from "./uniswap.svg";
@@ -76,7 +76,7 @@ function App() {
     if (returnedPairAddress.pair === "0x0000000000000000000000000000000000000000") {
       return (
         <>
-          <div>Pair does not exist on selected network. Would you like to create this pair?</div>
+          <CreatePairMessage>Pair does not exist on selected network. Would you like to create this pair?</CreatePairMessage>
           <Button onClick={() => submitTokensForPairCreation(provider, token0, token1)}>
             Create Pair!
           </Button>
@@ -122,44 +122,45 @@ function App() {
       </Header>
       <Body>
         <HeroImage src={logo} alt="react-logo" />
-        <Subtitle>Enter Token Addresses</Subtitle>
-        <About>Search Uniswap token pairs. Create new ones.</About>
-        <Tokens>
-          <Token>
-            <Label>Token0</Label>
-            <input style={{
-              "box-sizing": "border-box",
-              "width": "300px",
-              "height": "30px",
-              "border-radius": "6px",
-              "border": "none",
-              "outline": "none",
-              "font-size": "16px",
-              "padding": "10px",
-              "overflow": "scroll",
-              "resize": "none",
-            }} placeholder="Token address" onChange={e => setToken0(e.target.value)} value={token0}></input>
-          </Token>
-          <Token>
-            <Label>Token1</Label>
-            <input style={{
-              "box-sizing": "border-box",
-              "width": "300px",
-              "height": "30px",
-              "border-radius": "6px",
-              "border": "none",
-              "outline": "none",
-              "font-size": "16px",
-              "padding": "10px",
-              "overflow": "scroll",
-              "resize": "none",
-            }} placeholder="Token address" onChange={e => setToken1(e.target.value)} value={token1}></input>
-          </Token>
-        </Tokens>
-        
-        <Button onClick={() => submitTokensForChecking(provider, token0, token1)}>
-          Find Pair!
-        </Button>
+        <Container>
+          <Subtitle>Enter token addresses</Subtitle>
+          <About>Search Uniswap token pairs. Create new ones.</About>
+          <Tokens>
+            <Token>
+              <Label>token0</Label>
+              <input style={{
+                "box-sizing": "border-box",
+                "width": "300px",
+                "height": "30px",
+                "border-radius": "6px",
+                "border": "none",
+                "outline": "none",
+                "font-size": "16px",
+                "padding": "10px",
+                "overflow": "scroll",
+                "resize": "none",
+              }} placeholder="Token address" onChange={e => setToken0(e.target.value)} value={token0}></input>
+            </Token>
+            <Token>
+              <Label>token1</Label>
+              <input style={{
+                "box-sizing": "border-box",
+                "width": "300px",
+                "height": "30px",
+                "border-radius": "6px",
+                "border": "none",
+                "outline": "none",
+                "font-size": "16px",
+                "padding": "10px",
+                "overflow": "scroll",
+                "resize": "none",
+              }} placeholder="Token address" onChange={e => setToken1(e.target.value)} value={token1}></input>
+            </Token>
+          </Tokens>
+          <Button onClick={() => submitTokensForChecking(provider, token0, token1)}>
+            Find Pair!
+          </Button>
+        </Container>
         <PairAddress>{returnedPairAddress ? checkReturnedPairAddress(): null}</PairAddress>
       </Body>
     </>

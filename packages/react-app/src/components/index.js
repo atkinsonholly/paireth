@@ -53,6 +53,7 @@ export const Subtitle = styled.div`
 
 export const About = styled.div`
   font-size: 16px;
+  margin-top: 20px;
   margin-bottom: 20px;
 `;
 
@@ -63,14 +64,26 @@ export const PairAddress = styled.div`
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
-  color: #4752ff;
+  color: #423c86;
   min-height: 80px;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const Label = styled.div`
   font-size: 16px;
+  font-weight: 700;
   margin-left: 20px;
   margin-right: 5px;
+`;
+
+export const CreatePairMessage = styled.div`
+  font-size: 16px;
+  font-weight: 700;
+  margin-left: 20px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  color: #423c86;
 `;
 
 export const Tokens = styled.div`
@@ -102,6 +115,16 @@ export const Link = styled.a.attrs({
   text-decoration: none;
 `;
 
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  justify-content: center;
+  align-items: center;
+  background-color: #4752ff;
+  padding: 20px;
+`
+
 export const Button = styled.button`
   background-color: #4752ff;
   border: 2px solid #ffffff;
@@ -115,12 +138,11 @@ export const Button = styled.button`
   padding: 12px 24px;
   min-width: 180px;
   font-weight: 700;
-
-
-  ${props => props.hidden && "hidden"}
-  
   :focus {
     border: none;
     outline: none;
+  }
+  :hover {
+    background-color: #423c86;
   }
 `;
