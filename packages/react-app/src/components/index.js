@@ -46,19 +46,6 @@ export const HeroImage = styled.img`
   pointer-events: none;
 `;
 
-export const TokenInput = styled.input`
-  box-sizing: border-box,
-  width: 300px,
-  height: 75px,
-  border-radius: 6px,
-  border: none,
-  outline: none,
-  font-size: 16px,
-  padding: 10px,
-  overflow: scroll,
-  resize: none,
-`;
-
 export const Subtitle = styled.div`
   font-size: 24px;
   font-weight: 700;
@@ -90,6 +77,20 @@ export const Tokens = styled.div`
   display: flex;
   flex-direction: row;
   margin-bottom: 20px;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+`;
+
+export const Token = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  @media (max-width: 768px) {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    justify-content: flex-end;
+  }
 `;
 
 export const Link = styled.a.attrs({

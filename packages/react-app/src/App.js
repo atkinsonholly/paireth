@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Web3Provider } from "@ethersproject/providers";
 import { useQuery } from "@apollo/react-hooks";
 
-import { Body, Button, Header, Image, HeroImage, Link, LogoSection, TokenInput, Tokens, Label, Subtitle, PairAddress, About } from "./components";
+import { Body, Button, Header, Image, HeroImage, Link, LogoSection, Tokens, Token, Label, Subtitle, PairAddress, About } from "./components";
 import { web3Modal, logoutOfWeb3Modal } from "./utils/web3Modal";
 import logo from "./Paireth_large.png";
 import uniswapLogo from "./uniswap.svg";
@@ -114,10 +114,7 @@ function App() {
       <Header>
         <LogoSection>
           <Image src={uniswapLogo} alt="react-logo" />
-          <Link
-            href="https://info.uniswap.org/pairs"
-            style={{ marginTop: "8px" }}
-          >
+          <Link href="https://info.uniswap.org/pairs">
             Uniswap Pairs
           </Link>
         </LogoSection>
@@ -128,10 +125,36 @@ function App() {
         <Subtitle>Enter Token Addresses</Subtitle>
         <About>Search Uniswap token pairs. Create new ones.</About>
         <Tokens>
-          <Label>Token0</Label>
-          <TokenInput placeholder="Token address" onChange={e => setToken0(e.target.value)} value={token0}></TokenInput>
-          <Label>Token1</Label>
-          <TokenInput placeholder="Token address" onChange={e => setToken1(e.target.value)} value={token1}></TokenInput>
+          <Token>
+            <Label>Token0</Label>
+            <input style={{
+              "box-sizing": "border-box",
+              "width": "300px",
+              "height": "30px",
+              "border-radius": "6px",
+              "border": "none",
+              "outline": "none",
+              "font-size": "16px",
+              "padding": "10px",
+              "overflow": "scroll",
+              "resize": "none",
+            }} placeholder="Token address" onChange={e => setToken0(e.target.value)} value={token0}></input>
+          </Token>
+          <Token>
+            <Label>Token1</Label>
+            <input style={{
+              "box-sizing": "border-box",
+              "width": "300px",
+              "height": "30px",
+              "border-radius": "6px",
+              "border": "none",
+              "outline": "none",
+              "font-size": "16px",
+              "padding": "10px",
+              "overflow": "scroll",
+              "resize": "none",
+            }} placeholder="Token address" onChange={e => setToken1(e.target.value)} value={token1}></input>
+          </Token>
         </Tokens>
         
         <Button onClick={() => submitTokensForChecking(provider, token0, token1)}>
