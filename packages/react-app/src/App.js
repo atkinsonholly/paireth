@@ -5,7 +5,7 @@ import { useQuery } from "@apollo/react-hooks";
 
 import { Body, Button, Header, Image, HeroImage, Link, LogoSection, Tokens, Token, Label, Subtitle, PairAddress, About, Container, CreatePairMessage } from "./components";
 import { web3Modal, logoutOfWeb3Modal } from "./utils/web3Modal";
-import logo from "./Paireth_large.png";
+import logo from "./Paireth.png";
 import uniswapLogo from "./uniswap.svg";
 
 // import { addresses, abis } from "@project/contracts";
@@ -41,7 +41,6 @@ function App() {
     if (provider) {
       pairAddress = await checkForPair(provider.getSigner(), token0, token1);
     }
-    console.log(pairAddress)
     setReturnedPairAddress(pairAddress);
     return pairAddress;
   }
@@ -51,7 +50,6 @@ function App() {
     if (provider) {
       pairAddress = await createPair(provider.getSigner(), token0, token1); 
     }
-    console.log(pairAddress)
     setReturnedPairAddress(pairAddress)
     return pairAddress;
   }
@@ -97,7 +95,9 @@ function App() {
     <>
       <Header>
         <LogoSection>
-          <Image src={uniswapLogo} alt="react-logo" />
+          <Image>
+            <img src={uniswapLogo} alt="react-logo" />
+          </Image> 
           <Link href="https://info.uniswap.org/pairs">
             Uniswap Pairs
           </Link>
@@ -108,7 +108,9 @@ function App() {
         <WalletButton provider={provider} loadWeb3Modal={loadWeb3Modal} />
       </Header>
       <Body>
-        <HeroImage src={logo} alt="react-logo" />
+        <HeroImage>
+          <img src={logo} alt="react-logo" />
+        </HeroImage> 
         <Container>
           <Subtitle>Enter token addresses</Subtitle>
           <About>Search Uniswap token pairs. Create new ones.</About>
@@ -116,33 +118,33 @@ function App() {
             <Token>
               <Label>token0</Label>
               <input style={{
-                "box-sizing": "border-box",
-                "width": "400px",
-                "min-width": "300px",
-                "height": "30px",
-                "border-radius": "6px",
-                "border": "none",
-                "outline": "none",
-                "font-size": "16px",
-                "padding": "10px",
-                "overflow": "scroll",
-                "resize": "none",
+                boxSizing: "border-box",
+                width: "400px",
+                minWidth: "300px",
+                height: "30px",
+                borderRadius: "6px",
+                border: "none",
+                outline: "none",
+                fontSize: "16px",
+                padding: "10px",
+                overflow: "scroll",
+                resize: "none",
               }} placeholder="Token address" onChange={e => setToken0(e.target.value)} value={token0}></input>
             </Token>
             <Token>
               <Label>token1</Label>
               <input style={{
-                "box-sizing": "border-box",
-                "width": "400px",
-                "min-width": "300px",
-                "height": "30px",
-                "border-radius": "6px",
-                "border": "none",
-                "outline": "none",
-                "font-size": "16px",
-                "padding": "10px",
-                "overflow": "scroll",
-                "resize": "none",
+                boxSizing: "border-box",
+                width: "400px",
+                minWidth: "300px",
+                height: "30px",
+                borderRadius: "6px",
+                border: "none",
+                outline: "none",
+                fontSize: "16px",
+                padding: "10px",
+                overflow: "scroll",
+                resize: "none",
               }} placeholder="Token address" onChange={e => setToken1(e.target.value)} value={token1}></input>
             </Token>
           </Tokens>

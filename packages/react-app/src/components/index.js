@@ -1,7 +1,7 @@
 import styled from "styled-components";
 const backgroundImage = '/background.jpg';
 
-export const Header = styled.header`
+export const Header = styled.div`
   background-color: #4752ff;
   min-height: 70px;
   display: flex;
@@ -9,41 +9,46 @@ export const Header = styled.header`
   align-items: center;
   justify-content: space-between;
   color: white;
+  width: 100%;
+  border-radius: 0;
 `;
 
 export const LogoSection = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  width: 300px;
 `;
 
-export const Body = styled.body`
+export const Body = styled.div`
   align-items: center;
   background-image: url(${process.env.PUBLIC_URL + backgroundImage});
-  background-repeat:no-repeat;
-  background-size:cover;
+  background-repeat: no-repeat;
+  background-size: cover;
   color: white;
   display: flex;
   flex-direction: column;
-  font-size: calc(10px + 2vmin);
   justify-content: flex-start;
   min-height: calc(100vh - 70px);
 `;
 
-export const Image = styled.img`
-  height: 10vmin;
+export const Image = styled.div`
+  height: 68px;
   pointer-events: none;
   margin-top: 5px;
   margin-bottom: 5px;
   margin-left: 20px;
   margin-right: 20px;
+  display: flex;
+  align-items: center;
 `;
 
-export const HeroImage = styled.img`
+export const HeroImage = styled.div`
   height: 250px;
-  margin-bottom: 20px;
   pointer-events: none;
+  display: flex;
+  align-items: center;
 `;
 
 export const Subtitle = styled.div`
@@ -65,9 +70,11 @@ export const PairAddress = styled.div`
   display: flex;
   flex-direction: column;
   color: #423c86;
-  min-height: 90px;
+  height: 90px;
+  width: 100%;
   align-items: center;
   justify-content: center;
+  position: relative;
 `;
 
 export const Label = styled.div`
