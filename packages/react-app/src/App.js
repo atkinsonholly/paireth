@@ -117,6 +117,9 @@ function App() {
           <Link href="https://info.uniswap.org/pairs">
             Uniswap Pairs
           </Link>
+          <Link href="https://github.com/atkinsonholly/paireth">
+            Github
+          </Link>
         </LogoSection>
         <WalletButton provider={provider} loadWeb3Modal={loadWeb3Modal} />
       </Header>
@@ -130,7 +133,8 @@ function App() {
               <Label>token0</Label>
               <input style={{
                 "box-sizing": "border-box",
-                "width": "300px",
+                "width": "400px",
+                "min-width": "300px",
                 "height": "30px",
                 "border-radius": "6px",
                 "border": "none",
@@ -145,7 +149,8 @@ function App() {
               <Label>token1</Label>
               <input style={{
                 "box-sizing": "border-box",
-                "width": "300px",
+                "width": "400px",
+                "min-width": "300px",
                 "height": "30px",
                 "border-radius": "6px",
                 "border": "none",

@@ -65,7 +65,7 @@ export const PairAddress = styled.div`
   display: flex;
   flex-direction: column;
   color: #423c86;
-  min-height: 80px;
+  min-height: 90px;
   align-items: center;
   justify-content: center;
 `;
@@ -82,7 +82,7 @@ export const CreatePairMessage = styled.div`
   font-weight: 700;
   margin-left: 20px;
   margin-right: 5px;
-  margin-bottom: 5px;
+  margin-bottom: 20px;
   color: #423c86;
 `;
 
@@ -90,7 +90,7 @@ export const Tokens = styled.div`
   display: flex;
   flex-direction: row;
   margin-bottom: 20px;
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     flex-direction: column;
   }
 `;
@@ -99,7 +99,7 @@ export const Token = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     margin-top: 5px;
     margin-bottom: 5px;
     justify-content: flex-end;
@@ -113,6 +113,7 @@ export const Link = styled.a.attrs({
   color: #ffffff;
   font-size: 16px;
   text-decoration: none;
+  margin-right: 20px;
 `;
 
 export const Container = styled.div`
@@ -139,7 +140,6 @@ export const Button = styled.button`
   min-width: 180px;
   font-weight: 700;
   :focus {
-    border: none;
     outline: none;
   }
   :hover {
