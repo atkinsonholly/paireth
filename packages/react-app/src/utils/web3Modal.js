@@ -1,9 +1,7 @@
 import Web3Modal from "web3modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 
-// Enter a valid infura key here to avoid being rate limited
-// You can get a key for free at https://infura.io/register
-const INFURA_ID = "INVALID_INFURA_KEY";
+const INFURA_ID = "https://mainnet.infura.io/v3/65504bd4d88b4664946a8372940c209d";
 
 // Web3Modal also supports many other wallets.
 // You can see other options at https://github.com/Web3Modal/web3modal

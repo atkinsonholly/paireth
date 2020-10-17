@@ -27,7 +27,7 @@ export const Body = styled.body`
   display: flex;
   flex-direction: column;
   font-size: calc(10px + 2vmin);
-  justify-content: center;
+  justify-content: flex-start;
   min-height: calc(100vh - 70px);
 `;
 
@@ -41,8 +41,8 @@ export const Image = styled.img`
 `;
 
 export const HeroImage = styled.img`
-  height: 40vmin;
-  margin-bottom: 16px;
+  height: 250px;
+  margin-bottom: 20px;
   pointer-events: none;
 `;
 
