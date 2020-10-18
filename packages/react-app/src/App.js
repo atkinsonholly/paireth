@@ -20,22 +20,30 @@ const App = (props) => {
   const [token0, setToken0] = useState("");
   const [token1, setToken1] = useState("");
   const [returnedPairAddress, setReturnedPairAddress] = useState(null);
+  const [pendingTx, setPendingTx] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
 
-  const submitTokensForChecking = async(provider, token0, token1) => {
+  const submitTokensForChecking = async() => {
+    setErrorMessage(false);
+    setPendingTx(true);
     let pairAddress;
     if (provider) {
-      pairAddress = await checkForPair(provider.getSigner(), token0, token1);
+      pairAddress = await checkForPair(provider.getSigner(), token0, token1, setErrorMessage);
     }
     setReturnedPairAddress(pairAddress);
+    setPendingTx(false);
     return pairAddress;
   }
 
-  const submitTokensForPairCreation = async(provider, token0, token1) => {
+  const submitTokensForPairCreation = async() => {
+    setErrorMessage(false);
+    setPendingTx(true);
     let pairAddress;
     if (provider) {
-      pairAddress = await createPair(provider.getSigner(), token0, token1); 
+      pairAddress = await createPair(provider.getSigner(), token0, token1, setErrorMessage); 
     }
-    setReturnedPairAddress(pairAddress)
+    setReturnedPairAddress(pairAddress);
+    setPendingTx(false);
     return pairAddress;
   }
 
@@ -44,9 +52,9 @@ const App = (props) => {
       return (
         <>
           <div className={classes.createPairMessage}>Pair does not exist on selected network. Would you like to create this pair?</div>
-          <div className={classes.button} onClick={() => submitTokensForPairCreation(provider, token0, token1)}>
+          <button className={pendingTx ? classes.disabledButton : classes.button} onClick={submitTokensForPairCreation}>
             Create Pair!
-          </div>
+          </button>
         </>
       )
     }
@@ -55,6 +63,20 @@ const App = (props) => {
         <>Pair Address: {returnedPairAddress}</>
       )
     }
+  }
+
+  const checkForError = () => {
+    if (errorMessage) {
+      return (
+        <span className={classes.error}>Error: {errorMessage}</span>
+      )
+    }
+  }
+
+  const clearAll = () => {
+    setToken0("");
+    setToken1("");
+    setErrorMessage(null);
   }
 
   /* Open wallet selection modal. */
@@ -78,17 +100,7 @@ const App = (props) => {
 
   return (
     <>
-      <div style={{
-        backgroundColor: "#4752ff",
-        height: "70px",
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between",
-        color: "#ffffff",
-        width: "100%",
-        borderRadius: 0
-      }}>
+      <div className={classes.headerSection}>
         <div className={classes.logoSection}>
           <div className={classes.image}>
             <img src={uniswapLogo} alt="react-logo" />
@@ -129,11 +141,14 @@ const App = (props) => {
               <input className={classes.tokenInput} placeholder="Token address" onChange={e => setToken1(e.target.value)} value={token1}></input>
             </div>
           </div>
-          <button className={classes.button} onClick={() => submitTokensForChecking(provider, token0, token1)}>
-            Find Pair!
-          </button>
+          <div className={classes.buttonGroup}>
+            <button className={pendingTx || token0 === "" || token1 === "" ? classes.disabledButton : classes.button} onClick={submitTokensForChecking}>
+              Find Pair!
+            </button>
+            <span className={token0 !== "" || token1 !== "" || errorMessage ? classes.trash : classes.disabledTrash} onClick={clearAll}>X</span>
+          </div>
         </div>
-        <div className={classes.pairAddress}>{returnedPairAddress ? checkReturnedPairAddress(): null}</div>
+        <div className={classes.pairAddress}>{returnedPairAddress ? checkReturnedPairAddress(): checkForError()}</div>
       </div>
     </>
   );

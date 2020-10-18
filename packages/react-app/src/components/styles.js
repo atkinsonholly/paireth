@@ -1,6 +1,17 @@
 const backgroundImage = '/background.jpg';
 
 export const styles = {
+    headerSection: {
+        backgroundColor: "#4752ff",
+        height: "70px",
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        color: "#ffffff",
+        width: "100%",
+        borderRadius: 0
+    },
     logoSection: {
         display: "flex",
         flexDirection: "row",
@@ -142,6 +153,24 @@ export const styles = {
             fontSize: "10px",
         },
     },
+    disabledButton: {
+        backgroundColor: "#9d9caf",
+        border: "2px solid #ffffff",
+        borderRadius: "8px",
+        color: "#ffffff",
+        pointerEvents: "none",
+        fontSize: "16px",
+        textAlign: "center",
+        textDecoration: "none",
+        margin: "0px 20px",
+        padding: "12px 24px",
+        minWidth: "180px",
+        fontWeight: "700",
+        "@media (max-width: 1024px)": {
+            minWidth: "90px",
+            fontSize: "10px",
+        },
+    },
     tokenInput: {
         boxSizing: "border-box",
         minWidth: "400px",
@@ -158,4 +187,29 @@ export const styles = {
             fontSize: "10px",
         },
     },
+    error: {
+        fontSize: "12px",
+        textAlign: "center",
+        color: "#ff0000",
+    },
+    buttonGroup: {
+
+    },
+    trash: {
+        marginTop: "13px",
+        position: "absolute",
+        fontWeight: "700",
+        fontSize: "16px",
+        cursor: "pointer",
+        "&:hover": {
+            color: "#423c86",
+        },
+    },
+    disabledTrash: {
+        marginTop: "13px",
+        position: "absolute",
+        fontWeight: "700",
+        fontSize: "16px",
+        pointerEvents: "none",
+    }
 }
