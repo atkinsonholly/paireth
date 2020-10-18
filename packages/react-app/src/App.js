@@ -1,35 +1,20 @@
 import React, { useCallback, useEffect, useState } from "react";
-// import { Contract } from "@ethersproject/contracts";
 import { Web3Provider } from "@ethersproject/providers";
 import { useQuery } from "@apollo/react-hooks";
-
-import { Body, Button, Header, Image, HeroImage, Link, LogoSection, Tokens, Token, Label, Subtitle, PairAddress, About, Container, CreatePairMessage } from "./components";
 import { web3Modal, logoutOfWeb3Modal } from "./utils/web3Modal";
+import { checkForPair, createPair } from "./utils/generatePair";
+import { withStyles } from '@material-ui/core/styles'
+import {styles} from "./components/styles";
 import logo from "./Paireth.png";
 import uniswapLogo from "./uniswap.svg";
 
+// import { Contract } from "@ethersproject/contracts";
 // import { addresses, abis } from "@project/contracts";
-import GET_TRANSFERS from "./graphql/subgraph";
 
-import { checkForPair, createPair } from "./utils/generatePair";
+import GET_TRANSFERS from "./graphql/subgraph"; // update for subgraph
 
-function WalletButton({ provider, loadWeb3Modal }) {
-  return (
-    <Button
-      onClick={() => {
-        if (!provider) {
-          loadWeb3Modal();
-        } else {
-          logoutOfWeb3Modal();
-        }
-      }}
-    >
-      {!provider ? "Connect Wallet" : "Disconnect Wallet"}
-    </Button>
-  );
-}
-
-function App() {
+const App = (props) => {
+  const { classes } = props
   const { loading, error, data } = useQuery(GET_TRANSFERS); // update for subgraph
   const [provider, setProvider] = useState();
   const [token0, setToken0] = useState("");
@@ -58,10 +43,10 @@ function App() {
     if (returnedPairAddress.pair === "0x0000000000000000000000000000000000000000") {
       return (
         <>
-          <CreatePairMessage>Pair does not exist on selected network. Would you like to create this pair?</CreatePairMessage>
-          <Button onClick={() => submitTokensForPairCreation(provider, token0, token1)}>
+          <div className={classes.createPairMessage}>Pair does not exist on selected network. Would you like to create this pair?</div>
+          <div className={classes.button} onClick={() => submitTokensForPairCreation(provider, token0, token1)}>
             Create Pair!
-          </Button>
+          </div>
         </>
       )
     }
@@ -93,69 +78,65 @@ function App() {
 
   return (
     <>
-      <Header>
-        <LogoSection>
-          <Image>
+      <div style={{
+        backgroundColor: "#4752ff",
+        height: "70px",
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        color: "#ffffff",
+        width: "100%",
+        borderRadius: 0
+      }}>
+        <div className={classes.logoSection}>
+          <div className={classes.image}>
             <img src={uniswapLogo} alt="react-logo" />
-          </Image> 
-          <Link href="https://info.uniswap.org/pairs">
+          </div> 
+          <a className={classes.link} href="https://info.uniswap.org/pairs">
             Uniswap Pairs
-          </Link>
-          <Link href="https://github.com/atkinsonholly/paireth">
+          </a>
+          <a className={classes.link} href="https://github.com/atkinsonholly/paireth">
             Github
-          </Link>
-        </LogoSection>
-        <WalletButton provider={provider} loadWeb3Modal={loadWeb3Modal} />
-      </Header>
-      <Body>
-        <HeroImage>
+          </a>
+        </div>
+        <button className={classes.button}
+          onClick={() => {
+            if (!provider) {
+              loadWeb3Modal();
+            } else {
+              logoutOfWeb3Modal();
+            }
+          }}
+        >
+          {!provider ? "Connect Wallet" : "Disconnect Wallet"}
+        </button>
+      </div>
+      <div className={classes.pairContent}>
+        <div className={classes.heroImage}>
           <img src={logo} alt="react-logo" />
-        </HeroImage> 
-        <Container>
-          <Subtitle>Enter token addresses</Subtitle>
-          <About>Search Uniswap token pairs. Create new ones.</About>
-          <Tokens>
-            <Token>
-              <Label>token0</Label>
-              <input style={{
-                boxSizing: "border-box",
-                width: "400px",
-                minWidth: "300px",
-                height: "30px",
-                borderRadius: "6px",
-                border: "none",
-                outline: "none",
-                fontSize: "16px",
-                padding: "10px",
-                overflow: "scroll",
-                resize: "none",
-              }} placeholder="Token address" onChange={e => setToken0(e.target.value)} value={token0}></input>
-            </Token>
-            <Token>
-              <Label>token1</Label>
-              <input style={{
-                boxSizing: "border-box",
-                width: "400px",
-                minWidth: "300px",
-                height: "30px",
-                borderRadius: "6px",
-                border: "none",
-                outline: "none",
-                fontSize: "16px",
-                padding: "10px",
-                overflow: "scroll",
-                resize: "none",
-              }} placeholder="Token address" onChange={e => setToken1(e.target.value)} value={token1}></input>
-            </Token>
-          </Tokens>
-          <Button onClick={() => submitTokensForChecking(provider, token0, token1)}>
+        </div> 
+        <div className={classes.container}>
+          <div className={classes.subtitle}>Enter token addresses</div>
+          <div className={classes.about}>Search Uniswap token pairs. Create new ones.</div>
+          <div className={classes.tokens}>
+            <div className={classes.token}>
+              <div className={classes.label}>token0</div>
+              <input className={classes.tokenInput} placeholder="Token address" onChange={e => setToken0(e.target.value)} value={token0}></input>
+            </div>
+            <div className={classes.token}>
+              <div className={classes.label}>token1</div>
+              <input className={classes.tokenInput} placeholder="Token address" onChange={e => setToken1(e.target.value)} value={token1}></input>
+            </div>
+          </div>
+          <button className={classes.button} onClick={() => submitTokensForChecking(provider, token0, token1)}>
             Find Pair!
-          </Button>
-        </Container>
-        <PairAddress>{returnedPairAddress ? checkReturnedPairAddress(): null}</PairAddress>
-      </Body>
+          </button>
+        </div>
+        <div className={classes.pairAddress}>{returnedPairAddress ? checkReturnedPairAddress(): null}</div>
+      </div>
     </>
   );
 }
 
-export default App;
+export default withStyles(styles)(App);
