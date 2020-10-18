@@ -204,6 +204,10 @@ export const styles = {
         "&:hover": {
             color: "#423c86",
         },
+        "@media (max-width: 1024px)": {
+            fontSize: "14px",
+            marginTop: "11px",
+        },
     },
     disabledTrash: {
         marginTop: "13px",
@@ -211,5 +215,9 @@ export const styles = {
         fontWeight: "700",
         fontSize: "16px",
         pointerEvents: "none",
+        "@media (max-width: 1024px)": {
+            fontSize: "14px",
+            marginTop: "11px",
+        },
     }
 }
