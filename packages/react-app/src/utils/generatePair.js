@@ -20,7 +20,6 @@ export async function checkForPair(signer, token0, token1, setErrorMessage) {
     pair = await pairCreatorAsUser.functions.getPair(token0Address, token1Address);
     // note: if returned value is "0x0000000000000000000000000000000000000000" then pair does not exist
   } catch (e) {
-    console.log(e.message)
     setErrorMessage(e.message);
   }
   return pair;
