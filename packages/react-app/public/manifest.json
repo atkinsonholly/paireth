@@ -1,6 +1,6 @@
 {
-  "short_name": "Eth App",
-  "name": "Create Eth App Sample",
+  "short_name": "Paireth",
+  "name": "Paireth: a Uniswap V2 Pair-finder app",
   "icons": [
     {
       "src": "favicon.ico",

@@ -1,15 +1,24 @@
 import { gql } from "apollo-boost";
 
-// See more example queries on https://thegraph.com/explorer/subgraph/paulrberg/create-eth-app
-const GET_TRANSFERS = gql`
+export const GET_PAIRS = gql`
   {
-    transfers(first: 10) {
+    pairs(first: 10, orderBy: createdAtTimestamp, orderDirection: desc) {
       id
-      from
-      to
-      value
+      token0 {
+        id
+        symbol
+        name
+      }
+      token1 {
+        id
+        symbol
+        name
+      }
+      volumeToken0
+      volumeToken1
+      txCount
+      createdAtTimestamp
+      liquidityProviderCount
     }
-  }
+  }  
 `;
-
-export default GET_TRANSFERS;

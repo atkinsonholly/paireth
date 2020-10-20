@@ -171,6 +171,32 @@ export const styles = {
             fontSize: "10px",
         },
     },
+    navButton: {
+        backgroundColor: "#4752ff",
+        border: "2px solid #ffffff",
+        borderRadius: "8px",
+        color: "#ffffff",
+        cursor: "pointer",
+        fontSize: "16px",
+        textAlign: "center",
+        textDecoration: "none",
+        margin: "0px 20px",
+        padding: "12px 24px",
+        minWidth: "180px",
+        fontWeight: "700",
+        "&:focus": {
+            outline: "none",
+        },
+        "&:hover": {
+            backgroundColor: "#423c86",
+        },
+        "@media (max-width: 1024px)": {
+            minWidth: "115px",
+            fontSize: "10px",
+            margin: "2px 5px",
+            padding: "6px 12px"
+        },
+    },
     tokenInput: {
         boxSizing: "border-box",
         minWidth: "400px",
@@ -196,28 +222,48 @@ export const styles = {
 
     },
     trash: {
-        marginTop: "13px",
+        marginTop: "11px",
         position: "absolute",
-        fontWeight: "700",
-        fontSize: "16px",
         cursor: "pointer",
         "&:hover": {
             color: "#423c86",
         },
         "@media (max-width: 1024px)": {
-            fontSize: "14px",
-            marginTop: "11px",
+            marginTop: "8px",
         },
     },
     disabledTrash: {
-        marginTop: "13px",
+        marginTop: "11px",
         position: "absolute",
-        fontWeight: "700",
-        fontSize: "16px",
         pointerEvents: "none",
         "@media (max-width: 1024px)": {
-            fontSize: "14px",
-            marginTop: "11px",
+            marginTop: "8px",
+        },
+    },
+    tableTitle: {
+        textAlign: "center",
+        fontSize: "16px",
+        "@media (max-width: 1024px)": {
+            fontSize: "12px",
+        },
+    },
+    table: {
+        fontSize: "12px",
+        backgroundColor: "#4752ff",
+        borderRadius: "8px",
+        padding: "20px",
+        marginBottom: "20px",
+        "@media (max-width: 1024px)": {
+            padding: "12px",
+        },
+        "@media (max-width: 768px)": {
+            fontSize: "8px",
+            padding: "10px",
+        },
+    },
+    hide: {
+        "@media (max-width: 1300px)": {
+            display: "none",
         },
     }
 }
