@@ -1,9 +1,9 @@
 # PAIRETH
 
-> **UniswapV2 pair-finder dapp. Check pairs, create pairs!**
+> **Uniswap V2 pair-finder dapp. Check pairs, create pairs!**
 
-Check whether a Pair contract address exists for two given tokens on your selected network. If not, you have the option to create it. 
-Built with create-eth-app, IPFS, ENS and The Graph. 
+Check whether a Pair contract address exists for two given tokens on your selected network and view latest mainnet pairs. If not, you have the option to create it. 
+Built with create-eth-app (React, IPFS, The Graph). Deployed to IPFS and ENS. 
 
 Go to: https://pair.eth.link
 
