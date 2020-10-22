@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Web3Provider } from "@ethersproject/providers";
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery, useLazyQuery } from "@apollo/react-hooks";
 import { web3Modal, logoutOfWeb3Modal } from "./utils/web3Modal";
 import { checkForPair, createPair } from "./utils/generatePair";
 import { withStyles } from '@material-ui/core/styles'
@@ -12,11 +12,11 @@ import uniswapLogo from "./uniswap.svg";
 // import { Contract } from "@ethersproject/contracts";
 // import { addresses, abis } from "@project/contracts";
 
-import { GET_PAIRS } from "./graphql/subgraph";
+import { GET_PAIRS, GET_PAIRS_MATCHING_ONE_TOKEN } from "./graphql/subgraph";
 
 const App = (props) => {
   const { classes } = props
-  const { loading, error, data } = useQuery(GET_PAIRS);
+  const pairs = useQuery(GET_PAIRS);
   const [provider, setProvider] = useState();
   const [token0, setToken0] = useState("");
   const [token1, setToken1] = useState("");
@@ -25,6 +25,22 @@ const App = (props) => {
   const [errorMessage, setErrorMessage] = useState(null);
   const [mainnetPairs, setMainnetPairs] = useState([]);
   const [showMainnetPairs, setShowMainnetPairs] = useState(false);
+
+  const [pairsMatchingOneToken, setPairsMatchingOneToken] = useState([]);
+
+  const [getPairsMatchingOneToken, {loading, data}] = useLazyQuery(GET_PAIRS_MATCHING_ONE_TOKEN, {
+    variables: { 
+      token0: token0
+    }
+  });
+
+  const findPairsMatchingOneToken = () => {
+    getPairsMatchingOneToken()
+    if (!loading && data && data.pairs) {
+      setPairsMatchingOneToken(data.pairs);
+    }
+    console.log(pairsMatchingOneToken)
+  }
 
   const submitTokensForChecking = async() => {
     setErrorMessage(false);
@@ -138,6 +154,9 @@ const App = (props) => {
         </div>
       </div>
       <div className={classes.buttonGroup}>
+        <button className={pendingTx || token0 === "" ? classes.disabledButton : classes.button} onClick={findPairsMatchingOneToken}>
+          Find Matching!
+        </button>
         <button className={pendingTx || token0 === "" || token1 === "" ? classes.disabledButton : classes.button} onClick={submitTokensForChecking}>
           Find Pair!
         </button>
@@ -161,10 +180,10 @@ const App = (props) => {
   }, [loadWeb3Modal]);
 
   React.useEffect(() => {
-    if (!loading && !error && data && data.pairs) {
-      setMainnetPairs(data.pairs);
+    if (!pairs.loading && !pairs.error && pairs.data && pairs.data.pairs) {
+      setMainnetPairs(pairs.data.pairs);
     }
-  }, [loading, error, data]);
+  }, [pairs]);
 
   return (
     <>
